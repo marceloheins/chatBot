@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatBot-backend
+  namespace: chatBot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatBot-backend
+  template:
+    metadata:
+      labels:
+        app: chatBot-backend
+    spec:
+      containers:
+        - name: backend
+          image: your-docker-user/chatBot-backend:0.0.2
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_REDIS_HOST
+              value: "redis"
+            - name: SPRING_REDIS_PORT
+              value: "6379"
